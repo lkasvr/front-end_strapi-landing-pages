@@ -13,11 +13,11 @@ html {
 }
 
 body {
-  font-size: 2.4rem;
-  font-family: 'Open Sans', sans-serif;
+  font-size: 1.6rem;
+  font-family: ${({ theme }) => theme.font.family.default};
 }
 
 h1 {
-  font-family: 'Montserrat', sans-serif;
+  font-family:   font-family: ${({ theme }) => theme.font.family.secondary};
 }
 `;

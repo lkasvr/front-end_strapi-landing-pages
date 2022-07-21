@@ -1,0 +1,97 @@
+{
+  // Place your front-end_strapi-landing-pages workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"scope": "javascript,typescript",
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "reactComponent": {
+    "scope": "javascript",
+    "prefix": "react",
+    "body": [
+      "import P from 'prop-types';",
+      "import * as Styled from 'styled-components';",
+      "",
+      "export const $1 = ({ children }) => {",
+      "\treturn (",
+      "\t\t<Styled.Container>",
+      "\t\t\t<h1>{children}</h1>",
+      "\t\t</Styled.Container>",
+      "\t);",
+      "};",
+      "",
+      "$1.propTypes = {",
+      "\tchildren: P.node.isRequired,",
+      "};",
+      ""
+    ],
+    "description": "Gera um componente React para esse projeto em específico"
+  },
+  "Styled-Components": {
+    "scope": "javascript",
+    "prefix": "styled",
+    "body": [
+      "import styled, { css } from 'styled-components';",
+      "",
+      "export const Container = styled.div`",
+      "\t${() => css``}",
+      "`;",
+      ""
+    ],
+    "description": "Gera um código inicial de styled-components"
+  },
+  "Storybook": {
+    "scope": "javascript",
+    "prefix": "story",
+    "body": [
+      "import { $1 } from '.';",
+      "",
+      "export default {",
+      "\ttitle: '$1',",
+      "\tcomponent: '$1',",
+      "\targs: {",
+      "\t\tchildren: '$1',",
+      "\t},",
+      "\targTypes: {",
+      "\t\tchildren: { type: 'string' },",
+      "\t},",
+      "};",
+      "",
+      "export const Template = (args) => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t<$1 {...args} />",
+      "\t\t</div>",
+      "\t);",
+      "};"
+    ],
+    "description": "Gera um código inicial de storybook"
+  },
+  "Test-Component": {
+    "scope": "javascript",
+    "prefix": "test",
+    "body": [
+      "import { screen } from '@testing-library/react';",
+      "import { $1 } from '.';",
+      "import { renderTheme } from '../../styles/render-theme';",
+      "",
+      "describe('<$1 />', () => {",
+      "  it('should render', () => {",
+      "    renderTheme(<$1>Children</$1>);",
+      "    expect(screen.getByRole('heading')).toBeInTheDocument();",
+      "  });",
+      "});"
+    ],
+    "description": "Gera um código inicial de test"
+  },
+}

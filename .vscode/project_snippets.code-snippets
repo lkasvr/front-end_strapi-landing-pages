@@ -20,7 +20,7 @@
     "prefix": "react",
     "body": [
       "import P from 'prop-types';",
-      "import * as Styled from 'styled-components';",
+      "import * as Styled from './styles';",
       "",
       "export const $1 = ({ children }) => {",
       "\treturn (",
@@ -33,7 +33,7 @@
       "$1.propTypes = {",
       "\tchildren: P.node.isRequired,",
       "};",
-      ""
+      "",
     ],
     "description": "Gera um componente React para esse projeto em específico"
   },
@@ -44,7 +44,7 @@
       "import styled, { css } from 'styled-components';",
       "",
       "export const Container = styled.div`",
-      "\t${() => css``}",
+      "\t${({ theme }) => css``}",
       "`;",
       ""
     ],
@@ -58,7 +58,7 @@
       "",
       "export default {",
       "\ttitle: '$1',",
-      "\tcomponent: '$1',",
+      "\tcomponent: $1,",
       "\targs: {",
       "\t\tchildren: '$1',",
       "\t},",
@@ -73,7 +73,8 @@
       "\t\t\t<$1 {...args} />",
       "\t\t</div>",
       "\t);",
-      "};"
+      "};",
+      "",
     ],
     "description": "Gera um código inicial de storybook"
   },
@@ -82,15 +83,16 @@
     "prefix": "test",
     "body": [
       "import { screen } from '@testing-library/react';",
-      "import { $1 } from '.';",
       "import { renderTheme } from '../../styles/render-theme';",
+      "import { $1 } from '.';",
       "",
       "describe('<$1 />', () => {",
-      "  it('should render', () => {",
-      "    renderTheme(<$1>Children</$1>);",
-      "    expect(screen.getByRole('heading')).toBeInTheDocument();",
-      "  });",
-      "});"
+      "\tit('should render', () => {",
+      "\t\trenderTheme(<$1>Children</$1>);",
+      "\t\texpect(screen.getByRole('heading')).toBeInTheDocument();",
+      "\t});",
+      "});",
+      "",
     ],
     "description": "Gera um código inicial de test"
   },

@@ -89,7 +89,7 @@
       "describe('<$1 />', () => {",
       "\tit('should render', () => {",
       "\t\trenderTheme(<$1>Children</$1>);",
-      "\t\texpect(screen.getByRole('$1')).toBeInTheDocument();",
+      "\t\texpect(screen.getByRole('heading')).toBeInTheDocument();",
       "\t});",
       "});",
       "",

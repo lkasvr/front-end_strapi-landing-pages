@@ -4,7 +4,9 @@ import { Footer } from '.';
 
 describe('<Footer />', () => {
   it('should render Footer', () => {
-    const { container } = renderTheme(<Footer html={'<h1>Olá Mundo!</h1>'} />);
+    const { container } = renderTheme(
+      <Footer footerHtml={'<h1>Olá Mundo!</h1>'} />,
+    );
     expect(
       screen.getByRole('heading', { name: 'Olá Mundo!' }),
     ).toBeInTheDocument();

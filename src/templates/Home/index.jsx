@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Base } from '../Base';
 import { mockBase } from '../Base/mock';
 import { mapData } from '../../api/map-data';
+import { PageNotFound } from '../PageNotFound';
 
 function Home() {
   const [data, setData] = useState([]);
@@ -9,13 +10,17 @@ function Home() {
 
   useEffect(() => {
     const load = async () => {
-      const data = await fetch(
-        `http://localhost:1337/api/pages/?filters[slug]=dominic&populate=deep`,
-      );
-      const json = await data.json();
-      const { attributes } = json.data[0];
-      const pageData = mapData([attributes]);
-      setData(() => pageData[0]);
+      try {
+        const data = await fetch(
+          `http://localhost:1337/api/pages/?filters[slug]=dominic&populate=deep`,
+        );
+        const json = await data.json();
+        const { attributes } = json.data[0];
+        const pageData = mapData([attributes]);
+        setData(() => pageData[0]);
+      } catch (e) {
+        setData(() => undefined);
+      }
     };
 
     if (isMounted.current === true) load();
@@ -23,7 +28,7 @@ function Home() {
     return () => (isMounted.current = false);
   }, []);
 
-  if (data === undefined) return <h1>Página não encontrada</h1>;
+  if (data === undefined) return <PageNotFound />;
 
   if (data && !data.slug) return <h1>Carregando</h1>;
 

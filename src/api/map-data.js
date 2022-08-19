@@ -1,33 +1,15 @@
 import { mapMenu } from './map-menu';
 import { mapSections } from './map-sections';
 
-export const mapData = (pagesData = { data: [{}] }) => {
-  if (Array.isArray(pagesData.data)) {
-    return pagesData.data.map((data) => {
-      const {
-        footer_text: footerHtml = '',
-        slug = '',
-        title = '',
-        sections = [],
-        menu = {},
-      } = data.attributes;
-
-      return {
-        footerHtml,
-        slug,
-        title,
-        sections: mapSections(sections),
-        menu: mapMenu(menu),
-      };
-    });
-  } else {
+export const mapData = (pagesData = [{}]) => {
+  return pagesData.map((data) => {
     const {
       footer_text: footerHtml = '',
       slug = '',
       title = '',
       sections = [],
       menu = {},
-    } = pagesData.data.attributes;
+    } = data;
 
     return {
       footerHtml,
@@ -36,5 +18,5 @@ export const mapData = (pagesData = { data: [{}] }) => {
       sections: mapSections(sections),
       menu: mapMenu(menu),
     };
-  }
+  });
 };

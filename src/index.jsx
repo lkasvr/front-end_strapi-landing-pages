@@ -5,7 +5,7 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './styles/global-styles';
 import { theme } from './styles/theme';
-import Home from './templates/App';
+import Home from './templates/Home';
 
 const container = document.getElementById('root');
 

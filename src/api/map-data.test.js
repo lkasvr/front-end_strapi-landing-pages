@@ -9,13 +9,30 @@ describe('map-data', () => {
   });
 
   it('should map data if there are data', () => {
-    const pagesData = mapData([
-      {
-        footer_text: '<p>Hey</p>',
-        slug: 'slug',
-        title: 'title',
+    const pagesData = mapData({
+      data: [
+        {
+          footer_text: '<p>Hey</p>',
+          slug: 'slug',
+          title: 'title',
+        },
+      ],
+    })[0];
+    expect(pagesData.footerHtml).toBe('<p>Hey</p>');
+    expect(pagesData.slug).toBe('slug');
+    expect(pagesData.title).toBe('title');
+  });
+
+  it('should return data if there are single data object', () => {
+    const pagesData = mapData({
+      data: {
+        attributes: {
+          footer_text: '<p>Hey</p>',
+          slug: 'slug',
+          title: 'title',
+        },
       },
-    ])[0];
+    });
     expect(pagesData.footerHtml).toBe('<p>Hey</p>');
     expect(pagesData.slug).toBe('slug');
     expect(pagesData.title).toBe('title');

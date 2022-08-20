@@ -1,9 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
-import { Base } from '../Base';
-import { mockBase } from '../Base/mock';
+
 import { mapData } from '../../api/map-data';
+
+import { Base } from '../Base';
 import { PageNotFound } from '../PageNotFound';
 import { Loading } from '../Loading';
+import { GridTwoColumn } from '../../components/GridTwoColumn';
+import { GridContent } from '../../components/GridContent';
+import { GridText } from '../../components/GridText';
+import { GridImage } from '../../components/GridImage';
 
 function Home() {
   const [data, setData] = useState([]);
@@ -13,7 +18,7 @@ function Home() {
     const load = async () => {
       try {
         const data = await fetch(
-          `http://localhost:1337/api/pages/?filters[slug]=dominic&populate=deep`,
+          `http://localhost:1337/api/pages/?filters[slug]=dominic-1&populate=deep`,
         );
         const json = await data.json();
         const { attributes } = json.data[0];
@@ -33,7 +38,33 @@ function Home() {
 
   if (data && !data.slug) return <Loading />;
 
-  return <Base {...mockBase} />;
+  const { menu, sections, footerHtml, slug } = data;
+  const { links, text, link, srcImg } = menu;
+
+  return (
+    <Base
+      links={links}
+      footerHtml={footerHtml}
+      logoData={{ text, link, srcImg }}
+    >
+      {sections.map((section, i) => {
+        const { component } = section;
+        const key = `${slug}-${i}`;
+
+        if (component === 'section.section-two-columns')
+          return <GridTwoColumn key={key} {...section} />;
+
+        if (component === 'section.section-content')
+          return <GridContent key={key} {...section} />;
+
+        if (component === 'section.section-grid-text')
+          return <GridText key={key} {...section} />;
+
+        if (component === 'section.section-grid-image')
+          return <GridImage key={key} {...section} />;
+      })}
+    </Base>
+  );
 }
 
 export default Home;

@@ -18,7 +18,7 @@ function Home() {
     const load = async () => {
       try {
         const data = await fetch(
-          `http://localhost:1337/api/pages/?filters[slug]=dominic-1&populate=deep`,
+          `http://localhost:1337/api/pages/?filters[slug]=dominic&populate=deep`,
         );
         const json = await data.json();
         const { attributes } = json.data[0];
@@ -49,6 +49,7 @@ function Home() {
     >
       {sections.map((section, i) => {
         const { component } = section;
+        console.log(section);
         const key = `${slug}-${i}`;
 
         if (component === 'section.section-two-columns')

@@ -1,5 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // CSS
 import { ThemeProvider } from 'styled-components';
@@ -13,7 +14,11 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <Home />
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
       <GlobalStyles />
     </ThemeProvider>
   </React.StrictMode>,

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { mapData } from '../../api/map-data';
 
@@ -12,13 +13,18 @@ import { GridImage } from '../../components/GridImage';
 
 function Home() {
   const [data, setData] = useState([]);
+  const location = useLocation();
   const isMounted = useRef(true);
 
   useEffect(() => {
+    const pathName = location.pathname.replace(/[^a-z0-9-_]/gi, '');
+    const slug = pathName ? pathName : 'dominic'; //'landing-page' <- (correto) ajustar na API
+    console.log(slug);
+
     const load = async () => {
       try {
         const data = await fetch(
-          `http://localhost:1337/api/pages/?filters[slug]=dominic&populate=deep`,
+          `http://localhost:1337/api/pages/?filters[slug]=${slug}&populate=deep`,
         );
         const json = await data.json();
         const { attributes } = json.data[0];

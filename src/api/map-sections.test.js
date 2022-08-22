@@ -15,7 +15,7 @@ describe('map-sections', () => {
   });
 
   it('should render section with correct data', () => {
-    const data = mapSections(pagesFakeData[0].sections);
+    const data = mapSections(pagesFakeData.data[0].attributes.sections);
     expect(data[0].component).toBe('section.section-two-columns');
   });
 
@@ -55,26 +55,29 @@ describe('map-sections', () => {
     expect(data.title).toBe('');
   });
 
-  it('should map section two columns', () => {
+  it('should map section two columns with data', () => {
     const data = mapSectionTwoColumns({
       __component: 'section.section-two-columns',
-      title: 'January brings us Firefox 85',
-      description: 'To wrap up January.',
+      title: 'title',
+      description: 'abc',
       metadata: {
         background: true,
-        section_id: 'home',
-        name: 'Home',
+        section_id: 'contact',
       },
       image: {
-        url: 'a.svg',
+        data: {
+          attributes: {
+            url: 'a.svg',
+          },
+        },
       },
     });
     expect(data.background).toBe(true);
     expect(data.component).toBe('section.section-two-columns');
-    expect(data.sectionId).toBe('home');
+    expect(data.sectionId).toBe('contact');
     expect(data.srcImg).toBe('a.svg');
-    expect(data.text).toBe('To wrap up January.');
-    expect(data.title).toBe('January brings us Firefox 85');
+    expect(data.text).toBe('abc');
+    expect(data.title).toBe('title');
   });
 
   it('should map section content with no data', () => {
@@ -160,11 +163,17 @@ describe('map-sections', () => {
       text_grid: [],
       image_grid: [
         {
-          _id: '602fdf2d540c00269e056183',
-          __v: 0,
+          id: 1,
           image: {
-            alternativeText: 'abc',
-            url: 'a.svg',
+            data: [
+              {
+                id: 1,
+                attributes: {
+                  alternativeText: 'abc',
+                  url: 'a.svg',
+                },
+              },
+            ],
           },
         },
       ],

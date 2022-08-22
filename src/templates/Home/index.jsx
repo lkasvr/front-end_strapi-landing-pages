@@ -49,7 +49,6 @@ function Home() {
     >
       {sections.map((section, i) => {
         const { component } = section;
-        console.log(section);
         const key = `${slug}-${i}`;
 
         if (component === 'section.section-two-columns')

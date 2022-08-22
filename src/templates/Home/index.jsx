@@ -11,6 +11,8 @@ import { GridContent } from '../../components/GridContent';
 import { GridText } from '../../components/GridText';
 import { GridImage } from '../../components/GridImage';
 
+import config from '../../config';
+
 function Home() {
   const [data, setData] = useState([]);
   const location = useLocation();
@@ -18,13 +20,11 @@ function Home() {
 
   useEffect(() => {
     const pathName = location.pathname.replace(/[^a-z0-9-_]/gi, '');
-    const slug = pathName ? pathName : 'dominic'; //'landing-page' <- (correto) ajustar na API
+    const slug = pathName ? pathName : config.defaultSlug;
 
     const load = async () => {
       try {
-        const data = await fetch(
-          `http://localhost:1337/api/pages/?filters[slug]=${slug}&populate=deep`,
-        );
+        const data = await fetch(`${config.url}${slug}&populate=deep`);
         const json = await data.json();
         const { attributes } = json.data[0];
         const pageData = mapData([attributes]);
@@ -38,6 +38,12 @@ function Home() {
 
     return () => (isMounted.current = false);
   }, [location]);
+
+  useEffect(() => {
+    if (data === undefined) document.title = 'Página não encontrada!';
+    if (data && !data.slug) document.title = 'Carregando...';
+    if (data && data.title) document.title = data.title;
+  }, [data]);
 
   if (data === undefined) return <PageNotFound />;
 

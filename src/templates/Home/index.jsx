@@ -6,7 +6,7 @@ import { mapData } from '../../api/map-data';
 import { Base } from '../Base';
 import { PageNotFound } from '../PageNotFound';
 import { Loading } from '../Loading';
-import { GridTwoColumn } from '../../components/GridTwoColumn';
+import { GridTwoColumns } from '../../components/GridTwoColumns';
 import { GridContent } from '../../components/GridContent';
 import { GridText } from '../../components/GridText';
 import { GridImage } from '../../components/GridImage';
@@ -19,7 +19,6 @@ function Home() {
   useEffect(() => {
     const pathName = location.pathname.replace(/[^a-z0-9-_]/gi, '');
     const slug = pathName ? pathName : 'dominic'; //'landing-page' <- (correto) ajustar na API
-    console.log(slug);
 
     const load = async () => {
       try {
@@ -38,7 +37,7 @@ function Home() {
     if (isMounted.current === true) load();
 
     return () => (isMounted.current = false);
-  }, []);
+  }, [location]);
 
   if (data === undefined) return <PageNotFound />;
 
@@ -58,7 +57,7 @@ function Home() {
         const key = `${slug}-${i}`;
 
         if (component === 'section.section-two-columns')
-          return <GridTwoColumn key={key} {...section} />;
+          return <GridTwoColumns key={key} {...section} />;
 
         if (component === 'section.section-content')
           return <GridContent key={key} {...section} />;

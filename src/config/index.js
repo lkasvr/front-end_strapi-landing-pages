@@ -1,5 +1,5 @@
 export default {
-  url: 'http://localhost:1337/api/pages/?filters[slug]=',
+  url: 'https://strapi-v1-test.herokuapp.com/api/pages/?filters[slug]=',
   siteName: '',
   defaultSlug: 'dominic', // 'landing-page' <- (correto) ajustar na API
 };

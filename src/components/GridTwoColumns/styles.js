@@ -32,5 +32,7 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  ${() => css``}
+  ${() => css`
+    width: 100%;
+  `}
 `;

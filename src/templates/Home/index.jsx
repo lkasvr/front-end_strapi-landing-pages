@@ -24,7 +24,7 @@ function Home() {
 
     const load = async () => {
       try {
-        const data = await fetch(`${config.url}${slug}&populate=deep`);
+        const data = await fetch(config.url + slug + config.urlRule);
         const json = await data.json();
         const { attributes } = json.data[0];
         const pageData = mapData([attributes]);
